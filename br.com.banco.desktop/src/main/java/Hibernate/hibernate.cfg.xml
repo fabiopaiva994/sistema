@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name = "hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name = "hibernate.conection.driver_class">org.postgresql.Driver</property>
+        <property name = "hibernate.connection.url">jdbc:postgresql://localhost: 5432/BancoDesktop</property>
+        <property name = "hibernate.connection.username">postgres</property>
+        <property name = "hibernate.connection.password">ju1nior2</property>
+        <property name = "current_session_context_class">thread</property>
+        <property name = "hibernate.hbm2ddl.auto1">update</property>
+        
+         <!-- Mapeamento de Classes-->
+         <mapping class = "BancoDesktop.cliente.Cliente"/>
+         <mapping class = "BancoDesktop.pessoa.Pessoa"/>
+         <mapping class = "BancoDesktop.endereco.Endereco"/>
+         <mapping class = "BancoDesktop.conta.Conta"/>
+         <mapping class = "BancoDesktop.contapoupanca.ContaPoupanca"/>
+         <mapping class = "BancoDesktop.contacorrentecomum.ContaCorrenteComum"/>
+         <mapping class = "BancoDesktop.contacorrentelimitada.ContaCorrenteLimitada"/>
+         <mapping class = "BancoDesktop.extrato.Extrato"/>
+         
+    </session-factory>
+</hibernate-configuration>
