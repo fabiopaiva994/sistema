@@ -12,17 +12,29 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author fabio
  */
-public class Extrato {
+@Entity
+@Table(name = "extrato")
+@SequenceGenerator(name = "seqExtrato", sequenceName = "seq_extrato")
+public class Extrato implements Serializable{
+
+    @Id @GeneratedValue
+    private Long ID;
 
     public Extrato() {
 
@@ -131,6 +143,14 @@ public class Extrato {
 
         }
         return dados;
+    }
+
+    public Long getID() {
+        return ID;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
     }
 
 }

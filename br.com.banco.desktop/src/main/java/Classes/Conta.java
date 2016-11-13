@@ -15,6 +15,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -30,7 +31,7 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Conta implements Serializable{
 
-    @Id
+    @Id @GeneratedValue
     private long id;
     @Column(name = "numero", nullable = false)
     private String numero;

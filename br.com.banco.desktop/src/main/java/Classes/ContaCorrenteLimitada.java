@@ -9,13 +9,24 @@ import Classes.Cliente;
 import Classes.Endereco;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.StringTokenizer;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author FábioJunior
  */
-public class ContaCorrenteLimitada extends Conta {
+@Entity
+@Table(name = "contacorrentelimitada")
+@SequenceGenerator(name = "seqccl", sequenceName = "seq_ccl") 
+public class ContaCorrenteLimitada extends Conta implements Serializable{
+    
+    @Column(name = "limite", nullable = false)
     private double limite;
     
     public ContaCorrenteLimitada(double limite,String numero, String agencia, double saldo, String tipo,
@@ -34,17 +45,7 @@ public class ContaCorrenteLimitada extends Conta {
     
     public double getLimite() {
         return this.limite;
-    }
-
-    public Cliente getCli() {
-        return cli;
-    }
-
-    public void setCli(Cliente cli) {
-        this.cli = cli;
-    }
-    
-    
+    }    
     
     @Override
     public String toString() {
@@ -156,12 +157,13 @@ public class ContaCorrenteLimitada extends Conta {
 
             leitor.close();
             reader.close();
-            
+            Extrato ex = new Extrato();
+            Date d = ex.converteData(dataNasc);
             
             
             Endereco end = new Endereco(rua, numero2, complemento, bairro, cidade, estado, pais, cep);
             
-            Cliente cli = new Cliente( nome, rg, cpf, telefone, dataNasc, converteInt(idade), end);
+            Cliente cli = new Cliente( nome, rg, cpf, telefone, d, converteInt(idade), end);
             
             ContaCorrenteLimitada c = new ContaCorrenteLimitada(converteDouble(limite),numero, agencia, converteDouble(saldo), tipo, senha, 
                     email, converteDouble(rendaMensal), ContaCorrenteComum.verificaAtivo(ativo), cli);

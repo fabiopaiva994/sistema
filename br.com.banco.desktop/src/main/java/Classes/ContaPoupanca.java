@@ -5,24 +5,31 @@
  */
 package Classes;
 
-import Classes.Cliente;
-import Classes.Endereco;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Calendar;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.StringTokenizer;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author FábioJunior
  */
-public class ContaPoupanca extends Conta {
-    private String dtaCriacao;
+@Entity
+@Table(name = "contapoupanca")
+@SequenceGenerator(name = "seqpoupanca", sequenceName = "seq_poupanca")
+public class ContaPoupanca extends Conta implements Serializable{
+    @Column(name = "dtaCriacao", nullable = false)
+    private Date dtaCriacao;
     
-    public ContaPoupanca(String dtaCriacao, String numero, String agencia, double saldo, String tipo,
+    public ContaPoupanca(Date dtaCriacao, String numero, String agencia, double saldo, String tipo,
             String senha, String email, double rendaMensal, boolean ativo, Cliente cliente) {
             super(numero,agencia,saldo,tipo,senha,email,rendaMensal, ativo, cliente);
             this.dtaCriacao = dtaCriacao;
@@ -32,7 +39,7 @@ public class ContaPoupanca extends Conta {
         
     }
     
-    public String getDtaCriacao() {
+    public Date getDtaCriacao() {
         return this.dtaCriacao;
     }
     
@@ -146,10 +153,14 @@ public class ContaPoupanca extends Conta {
 
             leitor.close();
             reader.close();
+            Extrato ex = new Extrato();
+            Date d = ex.converteData(dataNasc);
+            
             
             Endereco end = new Endereco(rua, numero2, complemento, bairro, cidade, estado, pais, cep);
-            Cliente cli = new Cliente( nome, rg, cpf, telefone, dataNasc, ContaCorrenteLimitada.converteInt(idade), end);
-            ContaPoupanca c = new ContaPoupanca(dtaCriacao,numero, agencia, ContaCorrenteLimitada.converteDouble(saldo), tipo, senha,
+            Cliente cli = new Cliente( nome, rg, cpf, telefone, d, ContaCorrenteLimitada.converteInt(idade), end);
+            d = ex.converteData(dtaCriacao);
+            ContaPoupanca c = new ContaPoupanca(d,numero, agencia, ContaCorrenteLimitada.converteDouble(saldo), tipo, senha,
                     email, ContaCorrenteLimitada.converteDouble(rendaMensal), ContaCorrenteComum.verificaAtivo(ativo), cli);
             
             

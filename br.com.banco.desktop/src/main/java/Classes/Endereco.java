@@ -5,18 +5,37 @@
  */
 package Classes;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author fabio
  */
-public class Endereco {
+@Entity
+
+public class Endereco implements Serializable {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "rua", nullable = false)
     private String rua;
+    @Column(name = "bairro", nullable = false)
     private String bairro;
+    @Column(name = "complemento", nullable = false)
     private String complemento;
+    @Column(name = "numero", nullable = false)
     private String numero;
+    @Column(name = "cidade", nullable = false)
     private String cidade;
+    @Column(name = "estado", nullable = false)
     private String estado;
+    @Column(name = "pais", nullable = false)
     private String pais;
+    @Column(name = "cep", nullable = false)
     private String cep;
     
     public Endereco() {

@@ -9,18 +9,36 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
+import javax.annotation.Generated;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author fabio
  */
-public class Deposito {
+@Entity
+@Table(name = "deposito")
+@SequenceGenerator(name = "seqdeposito", sequenceName = "seq_deposito")
 
+public class Deposito implements Serializable{
+    @Id @GeneratedValue
+    private long id;
+    @Column(name = "conta", nullable = false)
     private Conta conta;
+    @Column(name = "numeroConta", nullable = false)
     private String numeroConta;
+    @Column(name = "numeroAgencia", nullable = false)
     private String numeroAgencia;
+    @Column(name = "valor", nullable = false)
     private double valor;
+    @Column(name = "telefone", nullable = false)
     private String telefone;
 
     public Deposito(String numeroConta, String numeroAgencia, double valor, String telefone) {
