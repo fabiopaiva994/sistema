@@ -5,18 +5,28 @@
  */
 package Classes;
 
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 /**
  *
  * @author fabio
  */
-public class Cliente extends Pessoa {
+@Entity 
+@Table(name = "cliente")
+@SequenceGenerator(name = "seqCliente", sequenceName = "seq_cliente")
+
+public class Cliente extends Pessoa implements Serializable {
     
     
     public Cliente() {
         
     }
     
-    public Cliente(String nome, String rg, String cpf, String telefone, String dataNasc, 
+    public Cliente(String nome, String rg, String cpf, String telefone, Date dataNasc, 
             int idade, Endereco endereco) {
         super(nome, rg, cpf, telefone,dataNasc, idade, endereco);
        

@@ -5,17 +5,39 @@
  */
 package Classes;
 
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 /**
  *
  * @author fabio
  */
-public class Pessoa {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Pessoa implements Serializable{
+    @Id
+    private long id;
+    @Column(name = "nome", nullable = false)
     private String nome;
+    @Column(name = "rg", nullable = false)
     private String rg;
+    @Column(name = "cpf", nullable = false)
     private String cpf;
+    @Column(name = "telefone", nullable = false)
     private String telefone;
+    @OneToOne(cascade = CascadeType.ALL) @JoinColumn(name = "endereco_fk")
     private Endereco endereco;
-    private String dataNasc;
+    @Column(name = "dataNasc", nullable = false)
+    private Date dataNasc;
+    @Column(name = "idade")
     private int idade;
 
     
@@ -23,7 +45,7 @@ public class Pessoa {
         
     }
     
-    public Pessoa(String nome, String rg, String cpf, String telefone,String dataNasc,
+    public Pessoa(String nome, String rg, String cpf, String telefone,Date dataNasc,
             int idade, Endereco endereco) {
         this.idade = idade;
         this.dataNasc = dataNasc;
@@ -74,11 +96,11 @@ public class Pessoa {
         this.endereco = Endereco;
     }
 
-    public String getDataNasc() {
+    public Date getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(String dataNasc) {
+    public void setDataNasc(Date dataNasc) {
         this.dataNasc = dataNasc;
     }
 
@@ -89,7 +111,4 @@ public class Pessoa {
     public void setIdade(int idade) {
         this.idade = idade;
     }
-    
-    
-    
 }

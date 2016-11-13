@@ -5,17 +5,20 @@
  */
 package Classes;
 
-import Classes.Cliente;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.StringTokenizer;
-import javax.sound.midi.Patch;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
@@ -23,17 +26,30 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
  *
  * @author fabio
  */
-public class Conta {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Conta implements Serializable{
 
+    @Id
+    private long id;
+    @Column(name = "numero", nullable = false)
     private String numero;
+    @Column(name = "agencia", nullable = false)
     private String agencia;
+    @Column(name = "saldo", nullable = false)
     private double saldo;
+    @Column(name = "tipo", nullable = false)
     private String tipo;
+    @Column(name = "senha", nullable = false)
     private String senha;
+    @Column(name = "email", nullable = true)
     private String email;
+    @Column(name = "rendamensal", nullable = false)
     private double rendaMensal;
+    @Column(name = "ativo", nullable = false)
     private boolean ativo;
-    Cliente cli;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cliente cli;
 
     public Conta() {
 

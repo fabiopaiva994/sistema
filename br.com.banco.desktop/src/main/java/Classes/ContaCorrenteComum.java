@@ -9,13 +9,22 @@ import Classes.Cliente;
 import Classes.Endereco;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.StringTokenizer;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author FábioJunior
  */
-public class ContaCorrenteComum extends Conta {
+@Entity
+@Table(name = "ContaCorrenteComum")
+@SequenceGenerator(name = "seqCCC", sequenceName = "seq_ccc")
+public class ContaCorrenteComum extends Conta implements Serializable {
     
     public ContaCorrenteComum(String numero, String agencia, double saldo, String tipo,
             String senha, String email, double rendaMensal, boolean ativo, Cliente cli) {
@@ -134,12 +143,14 @@ public class ContaCorrenteComum extends Conta {
 
                 }
             }
+            Extrato ex = new Extrato();
+            Date d = ex.converteData(dataNasc);
             //fechando o leitor
             leitor.close();
             reader.close();
             
             Endereco end = new Endereco(rua, numero2, complemento, bairro, cidade, estado, pais, cep);
-            Cliente cli = new Cliente( nome, rg, cpf, telefone, dataNasc, ContaCorrenteLimitada.converteInt(idade), end);
+            Cliente cli = new Cliente( nome, rg, cpf, telefone, d, ContaCorrenteLimitada.converteInt(idade), end);
             ContaCorrenteComum c = new ContaCorrenteComum(numero, agencia, ContaCorrenteLimitada.converteDouble(saldo), tipo, 
                     senha, email, ContaCorrenteLimitada.converteDouble(rendaMensal), verificaAtivo(ativo), cli);
             
