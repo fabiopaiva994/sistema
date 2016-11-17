@@ -25,6 +25,7 @@ import javax.persistence.Table;
 @Table(name = "contacorrentelimitada")
 @SequenceGenerator(name = "seqccl", sequenceName = "seq_ccl") 
 public class ContaCorrenteLimitada extends Conta implements Serializable{
+    private static final long serialVersionUID = -2L;
     
     @Column(name = "limite", nullable = false)
     private double limite;

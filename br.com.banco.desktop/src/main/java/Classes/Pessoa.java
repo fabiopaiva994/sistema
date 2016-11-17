@@ -23,7 +23,10 @@ import javax.persistence.OneToOne;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 public class Pessoa implements Serializable{
+    private static final long serialVersionUID = -2L;
+    
     @Id @GeneratedValue
     private long id;
     @Column(name = "nome", nullable = false)

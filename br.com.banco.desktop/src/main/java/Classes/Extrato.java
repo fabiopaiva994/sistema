@@ -32,6 +32,8 @@ import javax.swing.JOptionPane;
 @Table(name = "extrato")
 @SequenceGenerator(name = "seqExtrato", sequenceName = "seq_extrato")
 public class Extrato implements Serializable{
+    private static final long serialVersionUID = -2L;
+    
 
     @Id @GeneratedValue
     private Long ID;

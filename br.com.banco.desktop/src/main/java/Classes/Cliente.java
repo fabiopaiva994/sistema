@@ -20,6 +20,7 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "seqCliente", sequenceName = "seq_cliente")
 
 public class Cliente extends Pessoa implements Serializable {
+    private static final long serialVersionUID = -2L;
     
     
     public Cliente() {

@@ -28,6 +28,8 @@ import javax.swing.JOptionPane;
 @SequenceGenerator(name = "seqdeposito", sequenceName = "seq_deposito")
 
 public class Deposito implements Serializable{
+    private static final long serialVersionUID = -2L;
+    
     @Id @GeneratedValue
     private long id;
     @Column(name = "conta", nullable = false)

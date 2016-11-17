@@ -21,7 +21,7 @@ import org.hibernate.criterion.Restrictions;
 public class ClasseDAO {
 
     private static final long serialVersionUID = 1L;
-    private Session session = hibernate.HibernateUtil.getSession();
+    private Session session = HibernateUtil.getSessionFactory().openSession();
 
     public void cadastrarAluno(Object a) {
         org.hibernate.Transaction tx = this.session.beginTransaction();

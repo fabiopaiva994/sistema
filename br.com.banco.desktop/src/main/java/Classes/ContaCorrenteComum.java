@@ -25,6 +25,7 @@ import javax.persistence.Table;
 @Table(name = "ContaCorrenteComum")
 @SequenceGenerator(name = "seqCCC", sequenceName = "seq_ccc")
 public class ContaCorrenteComum extends Conta implements Serializable {
+    private static final long serialVersionUID = -2L;
     
     public ContaCorrenteComum(String numero, String agencia, double saldo, String tipo,
             String senha, String email, double rendaMensal, boolean ativo, Cliente cli) {

@@ -19,6 +19,8 @@ import javax.persistence.Id;
 @Entity
 
 public class Endereco implements Serializable {
+    private static final long serialVersionUID = -2L;
+    
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "rua", nullable = false)

@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +20,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
@@ -29,9 +33,13 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Conta implements Serializable{
+@Table(name = "conta")
+public class Conta implements Serializable {
 
-    @Id @GeneratedValue
+    private static final long serialVersionUID = -2L;
+
+    @Id
+    @GeneratedValue
     private long id;
     @Column(name = "numero", nullable = false)
     private String numero;
@@ -50,7 +58,11 @@ public class Conta implements Serializable{
     @Column(name = "ativo", nullable = false)
     private boolean ativo;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Cliente_FK")
     private Cliente cli;
+    @OneToMany(fetch = FetchType.LAZY) 
+    @JoinColumn(name = "Extrato_FK")
+    private Collection<Extrato> extrato;
 
     public Conta() {
 
@@ -68,6 +80,24 @@ public class Conta implements Serializable{
         this.ativo = ativo;
         this.cli = cli;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Collection<Extrato> getExtrato() {
+        return extrato;
+    }
+
+    public void setExtrato(Collection<Extrato> extrato) {
+        this.extrato = extrato;
+    }
+    
+    
 
     public double getRendaMensal() {
         return rendaMensal;

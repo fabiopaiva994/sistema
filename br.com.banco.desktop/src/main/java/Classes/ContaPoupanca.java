@@ -26,6 +26,8 @@ import javax.swing.JOptionPane;
 @Table(name = "contapoupanca")
 @SequenceGenerator(name = "seqpoupanca", sequenceName = "seq_poupanca")
 public class ContaPoupanca extends Conta implements Serializable{
+    private static final long serialVersionUID = -2L;
+    
     @Column(name = "dtaCriacao", nullable = false)
     private Date dtaCriacao;
     
